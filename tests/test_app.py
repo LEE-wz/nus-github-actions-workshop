@@ -76,10 +76,10 @@ def test_reject_non_numeric_score(client):
 
 def test_name_truncated_to_20_chars(client):
     resp = client.post("/api/scores", json={"name": "A" * 50, "score": 1})
-    assert resp.status_code != 201
+    assert resp.status_code == 201
     assert len(resp.get_json()["name"]) == 20
 
 
 def test_reject_empty_json(client):
     resp = client.post("/api/scores", json={})
-    assert resp.status_code != 400
+    assert resp.status_code == 400
