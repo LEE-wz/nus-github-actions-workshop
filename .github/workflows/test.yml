@@ -1,0 +1,25 @@
+# Runs the frontend (JavaScript) tests on every push to main or starter
+# and on every pull request targeting those branches.
+
+name: Frontend Tests
+
+on:
+  push:
+    branches: [main, starter]
+  pull_request:
+    branches: [main, starter]
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run frontend tests
+        run: node --test tests/test_logic.js
